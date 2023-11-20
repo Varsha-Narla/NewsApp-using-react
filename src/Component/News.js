@@ -74,7 +74,7 @@ const News = (props) => {
 
   return (
     <div className="container my-3">
-      <h1 style={{marginTop:'90px'}}>Abhi Tak-Top Headline</h1>
+      <h1 style={{marginTop:'90px'}}>News Verse-Top Headline</h1>
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreData}

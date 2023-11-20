@@ -7,7 +7,7 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-lg fixed-top text-white bg-black">
         <div className="container-fluid ">
           <Link className="navbar-brand text-white" to="/">
-            Abhi Tak
+            News Verse
           </Link>
           <button
             className="navbar-toggler"
