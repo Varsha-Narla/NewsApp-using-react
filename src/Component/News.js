@@ -10,7 +10,7 @@ const News = (props) => {
   const [totalResults, setTotalResults] = useState(0);
 
   const updateNews = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=6ba928f43ff54790aae99459c3393f4e&page=1&pagesize=15`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=eab5fe67d95e4ebfab0d0fde9485cd94&page=1&pagesize=15`;
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
@@ -59,7 +59,7 @@ const News = (props) => {
   // };
   const fetchMoreData = async () => {
     setPage(page+1);
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=6ba928f43ff54790aae99459c3393f4e&page=1&pagesize=15`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=eab5fe67d95e4ebfab0d0fde9485cd94&page=1&pagesize=15`;
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
