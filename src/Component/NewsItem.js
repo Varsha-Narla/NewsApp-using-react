@@ -1,6 +1,6 @@
 import React from "react";
 
-const NewsItem = ({ Title, description, imageurl, newsurl, date, author, source, onSave }) => {
+const NewsItem = ({ Title, description, imageurl, newsurl, author, date, source, onSave }) => {
   return (
     <div className="my-3">
       <div className="card" style={{ width: "18rem" }}>
@@ -14,34 +14,22 @@ const NewsItem = ({ Title, description, imageurl, newsurl, date, author, source,
           alt="..."
         />
         <div className="card-body">
-          <h5 className="card-title">
-            {Title}{" "}
-            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {source}
-              <span className="visually-hidden">unread messages</span>
-            </span>
+          <h5 className="card-title" style={{fontSize: '1.25rem'}}>
+            {Title}
           </h5>
-          <p className="card-text">{description}</p>
-          <p className="card-text">
+          <p className="card-text" >
             <small>
-              By {!author ? "unknown" : author} on{" "}
-              {new Date(date).toGMTString()}
+              From {!source ? "unknown" : source} on {new Date(date).toGMTString()}
             </small>
           </p>
-          <a
-            href={newsurl}
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-dark"
-          >
+          {/* save button */}
+          <button className="btn btn-primary" onClick={onSave} style={{ marginRight: '30px', marginLeft: '30px' }}>
+            Save
+          </button>
+          {/* read more button */}
+          <a href={newsurl} target="_blank" rel="noreferrer" className="btn btn-dark">
             Read More
           </a>
-          {/* Save button */}
-          {onSave && (
-            <button className="btn btn-primary" onClick={onSave}>
-              Save
-            </button>
-          )}
         </div>
       </div>
     </div>

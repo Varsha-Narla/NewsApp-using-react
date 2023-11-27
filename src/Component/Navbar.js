@@ -9,7 +9,7 @@ const Navbar = () => {
     <div>
       <nav className="navbar navbar-expand-lg fixed-top text-white bg-black">
         <div className="container-fluid ">
-          <Link className="navbar-brand text-white" to="/">
+          <Link className="navbar-brand text-neon" to="/">
             News Verse
           </Link>
           <button

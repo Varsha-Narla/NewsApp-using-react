@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { AppContext } from "../App"; // Adjust the path based on your project structure
-import NewsItem from "./NewsItem"; // Adjust the path based on your project structure
+import { AppContext } from "../App"; 
+import NewsItem from "./NewsItem"; 
 import { Link } from "react-router-dom";
 
 const SavedArticles = () => {
@@ -22,9 +22,6 @@ const SavedArticles = () => {
                 date={element.publishedAt}
                 source={element.source.name}
               />
-              <Link to={`/saved/${encodeURIComponent(element.url)}`} className="btn btn-primary">
-                View Full Article
-              </Link>
             </div>
           ))}
         </div>

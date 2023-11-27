@@ -2,16 +2,16 @@ import "./App.css";
 import React, { createContext, useState } from "react";
 import Navbar from "./Component/Navbar";
 import News from "./Component/News";
-import SavedArticles from "./Component/SavedArticles"; // Import the SavedArticles component
+import SavedArticles from "./Component/SavedArticles";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Create a context to manage saved articles
+//managing saved articles []context
 export const AppContext = createContext();
 
 const App = () => {
   const [savedArticles, setSavedArticles] = useState([]);
 
-  // Function to save an article
+  //saving articles function 
   const saveArticle = (article) => {
     setSavedArticles((prevArticles) => [...prevArticles, article]);
   };

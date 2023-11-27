@@ -5,6 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { AppContext } from "../App"; // Adjust the path based on your project structure
 
 const News = (props) => {
+  // eslint-disable-next-line
   const { savedArticles, saveArticle } = useContext(AppContext);
   const [articles, setArticles] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
