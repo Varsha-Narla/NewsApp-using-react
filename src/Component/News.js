@@ -1,20 +1,21 @@
-import React, { useEffect, useState, useContext } from "react";
-import NewsItem from "./NewsItem"; // Adjust the path based on your project structure
+// News.js
+import React, { useEffect, useState } from "react";
+import NewsItem from "./NewsItem";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { AppContext } from "../App"; // Adjust the path based on your project structure
+import SearchBar from "./SearchBar";
 
 const News = (props) => {
-  // eslint-disable-next-line
-  const { savedArticles, saveArticle } = useContext(AppContext);
   const [articles, setArticles] = useState([]);
-  const [totalResults, setTotalResults] = useState(0);
   const [page, setPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   const updateNews = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=eab5fe67d95e4ebfab0d0fde9485cd94&page=${page}&pagesize=15`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=eab5fe67d95e4ebfab0d0fde9485cd94&page=1&pagesize=15`;
     let data = await fetch(url);
     let parsedData = await data.json();
+    console.log(parsedData);
     setArticles(parsedData.articles);
     setTotalResults(parsedData.totalResults);
   };
@@ -22,19 +23,32 @@ const News = (props) => {
   useEffect(() => {
     updateNews();
     // eslint-disable-next-line
-  }, [page, props.category]);
+  }, []);
 
   const fetchMoreData = async () => {
     setPage(page + 1);
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=eab5fe67d95e4ebfab0d0fde9485cd94&page=${page}&pagesize=15`;
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    console.log(parsedData);
+    setArticles(articles.concat(parsedData.articles));
+    setTotalResults(parsedData.totalResults);
   };
 
-  const handleSaveClick = (article) => {
-    saveArticle(article);
+  const handleSearch = async (query) => {
+    setSearchKeyword(query);
+    const url = `https://newsapi.org/v2/everything?q=${query}&apiKey=eab5fe67d95e4ebfab0d0fde9485cd94&page=1&pagesize=15`;
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    console.log(parsedData);
+    setArticles(parsedData.articles);
+    setTotalResults(parsedData.totalResults);
   };
 
   return (
     <div className="container my-3">
       <h1 style={{ marginTop: "90px" }}>News Verse-Top Headline</h1>
+      <SearchBar onSearch={handleSearch} />
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreData}
@@ -48,13 +62,16 @@ const News = (props) => {
                 <div className="col-sm-4" key={element.url}>
                   <NewsItem
                     Title={element.title ? element.title.slice(0, 30) : ""}
-                    description={element.description ? element.description.slice(0, 88) : ""}
+                    description={
+                      element.description
+                        ? element.description.slice(0, 88)
+                        : ""
+                    }
                     imageurl={element.urlToImage}
                     newsurl={element.url}
                     author={element.author}
                     date={element.publishedAt}
                     source={element.source.name}
-                    onSave={() => handleSaveClick(element)}
                   />
                 </div>
               );
@@ -68,7 +85,7 @@ const News = (props) => {
 
 News.defaultProps = {
   country: "in",
-  category: "general",
+  category: "sports",
 };
 News.propTypes = {
   country: PropTypes.string,
